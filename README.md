@@ -9,6 +9,10 @@ Website to play hexagonal chess
 * Credential recovery
 * Teach the rules
 
+## Ispirations
+1. ![screen](/Assets/Screenshot 2023-09-25 132956.png)
+2. ![screen](/Assets/Screenshot 2023-09-25 130233.png)
+
 ## Checkpoints
 ### Stage 1
 - [ ] Playable chess board (2P local)
