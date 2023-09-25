@@ -10,8 +10,8 @@ Website to play hexagonal chess
 * Teach the rules
 
 ## Ispirations
-1. ![Ispiration](HezChess/Assets/Screenshot 2023-09-25 130233.png)
-2. ![Ispiration](HezChess/Assets/Screenshot 2023-09-25 132956.png)
+1. ![Chess.com](/Assets/Chess-com.png)
+2. ![HexagonalChess](/Assets/HexagonalChess.png)
 
 ## Checkpoints
 ### Stage 1
