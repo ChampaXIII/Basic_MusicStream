@@ -12,7 +12,12 @@ Website to play hexagonal chess
 ## Ispirations
 1. ![Chess.com](/Assets/Chess-com.png)
 2. ![HexagonalChess](/Assets/HexagonalChess.png)
-3. ![HexagonalChess](/Assets/SchemaER.png)
+
+## AR
+![HexagonalChess](/Assets/SchemaER.png)
+
+## Mocup
+
 
 ## Checkpoints
 ### Stage 1
