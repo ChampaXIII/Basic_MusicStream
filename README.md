@@ -3,12 +3,17 @@ Website to play hexagonal chess
 Target: chess players
 
 ## Functions
-* Play localy (2 player from the same browser)
-* Play online (2 plater from diffrent browsers)
-* Watch old games (Hav acces to old game move list and, by selecting a move, show the game, apeaces, state on the board)
-* User login
-* Credential recovery
-* Teach the rules (Website sectionin which you can expose the new moves of each peace)
+* Log in
+* Log out
+* Start a local game
+* Open an online room
+* Close an online room
+* Give up
+* Offer draw
+* Accept draw
+* Move piece
+
+
 
 ## AR
 ![HexagonalChess](/Assets/SchemaER.png)
@@ -42,3 +47,41 @@ Target: chess players
 #### Stage 5
 - [ ] Watch old games
 - [ ] Explane the rules
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+* Play localy (2 player from the same browser)
+* Play online (2 plater from diffrent browsers)
+* Watch old games (Hav acces to old game move list and, by selecting a move, show the game, apeaces, state on the board)
+* User login
+* Credential recovery
+* Teach the rules (Website sectionin which you can expose the new moves of each peace)
+
