@@ -16,7 +16,7 @@ Target: chess players
 
 
 ## AR
-![HexagonalChess](/Assets/SchemaER.png)
+![HexagonalChess](/Assets/schemaER.png)
 
 ## Mocup
 
