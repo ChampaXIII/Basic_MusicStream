@@ -18,6 +18,15 @@ Target: chess players
 ## AR
 ![HexagonalChess](/Assets/schemaER.png)
 
+## DR
+- Account(__ID__, nickname, mail, a_name, a_srname, password);
+- Admin (__Account_ID__);
+- Utente (__Account_ID__);
+- Torneo (__ID__, t_nome, __Admin_Account_ID__);
+- Partita (__p1__, __p2__, __date__, __hour__);
+- (__Utente_Account_ID__, __Torneo_ID__);
+- 
+
 ## Mocup
 
 
