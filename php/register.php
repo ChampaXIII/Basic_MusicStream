@@ -1,10 +1,40 @@
 <?php
 session_start();
 
-// Include database connection
 include_once('config.php');
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+
+    $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+
+    $result = $stmt->get_result();
+
+    if ($result->num_rows > 0) {
+        $_SESSION['message'] = "Username already exists!";
+        header('Location: register.php');
+        exit;
+    } else {
+        $username = $_POST['username'];
+        $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+
+        $sql = "INSERT INTO users (username, password) VALUES ('$username', '$password')";
+        $result = mysqli_query($conn, $sql);
+        exit;
+    }
+
+    $stmt->close();
+    $conn->close();
+}
+
+/* if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
@@ -17,7 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         $_SESSION['message'] = 'Registration failed!';
     }
-}
+} */
 
 ?>
 

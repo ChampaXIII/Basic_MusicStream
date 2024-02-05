@@ -30,6 +30,9 @@ if (!isset($_SESSION['username'])) {
     <label>Genre:</label>
     <input type="text" id="genre" required><br>
 
+    <!-- <label>Audio:</label>
+    <input type="file" id="audio" accept="audio/*" required><br> -->
+
     <button type="button" onclick="addSong()">Add Song</button>
 </form>
 

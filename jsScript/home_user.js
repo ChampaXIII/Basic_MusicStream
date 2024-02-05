@@ -14,7 +14,7 @@ function addSong() {
         contentType: 'application/json',
         data: JSON.stringify({ title: title, artist: artist, genre: genre }),
         success: function (data) {
-            alert(data.message);
+            //alert(data.message);
             loadSongs();
 
             document.getElementById('title').value = '';
@@ -49,7 +49,7 @@ function deleteSong(id) {
             contentType: 'application/x-www-form-urlencoded',
             data: { id: id },
             success: function (data) {
-                alert(data.message);
+                //alert(data.message);
                 loadSongs();
             }
         });

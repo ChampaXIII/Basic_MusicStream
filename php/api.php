@@ -72,4 +72,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
 }
 
 mysqli_close($conn);
-?>
+
