@@ -49,5 +49,7 @@ if (isset($_SESSION['message'])) {
     <button type="submit">Register</button>
 </form>
 
+<a href="login.php">Login</a>
+
 </body>
 </html>

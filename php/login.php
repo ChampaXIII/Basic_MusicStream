@@ -51,6 +51,8 @@ if (isset($_SESSION['message'])) {
     <input type="password" name="password" required><br>
 
     <button type="submit">Login</button>
+
+    <p>Don't have an account? <a href="register.php">Register</a></p>
 </form>
 
 </body>
