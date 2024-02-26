@@ -8,6 +8,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
+    // Check users table
     $sql = "SELECT * FROM users WHERE username='$username'";
     $result = mysqli_query($conn, $sql);
 
@@ -21,6 +22,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     } else {
         $_SESSION['message'] = 'User not found!';
+    }
+
+    // Check artists table
+    $sql = "SELECT * FROM artist WHERE username='$username'";
+    $result = mysqli_query($conn, $sql);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $artist = mysqli_fetch_assoc($result);
+        if (password_verify($password, $artist['password'])) {
+            $_SESSION['username'] = $username;
+            header('Location: home_artist.php');
+        } else {
+            $_SESSION['message'] = 'Invalid password!';
+        }
+    } else {
+        $_SESSION['message'] = 'Artist not found!';
     }
 }
 ?>

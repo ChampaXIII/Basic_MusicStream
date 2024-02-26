@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         die("Connection failed: " . $conn->connect_error);
     }
 
-    $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+    $stmt = $conn->prepare("SELECT * FROM artist WHERE username = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
 
@@ -25,8 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $username = $_POST['username'];
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
-        $sql = "INSERT INTO users (username, password) VALUES ('$username', '$password')";
-        $result = mysqli_query($conn, $sql);
+        $sql = "INSERT INTO artist (username, password) VALUES ('$username', '$password')";
+
+        $result = mysqli_query($conn, $sql);    
 
         $_SESSION['message'] = 'Registration successful!';
         header('Location: login.php');
@@ -60,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registration</title>
+    <title>Viva giorgio</title>
 </head>
 <body>
 
@@ -75,7 +76,7 @@ if (isset($_SESSION['message'])) {
 
 
 
-<form method="post" action="register.php">
+<form method="post" action="register_musician.php">
     <label>Username:</label>
     <input type="text" name="username" required><br>
 
@@ -86,7 +87,7 @@ if (isset($_SESSION['message'])) {
 </form>
 
 <a href="login.php">Login</a>
-<a href="register_musician.php">You are a musician?</a>
+<a href="regis
 
 </body>
 </html>
