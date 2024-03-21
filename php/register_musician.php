@@ -26,7 +26,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
 
         $sql = "INSERT INTO artist (username, password) VALUES ('$username', '$password')";
-
+            
         $result = mysqli_query($conn, $sql);    
 
         $_SESSION['message'] = 'Registration successful!';
