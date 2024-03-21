@@ -1,1 +1,1 @@
-![ER_Image](./img/ER.png "ER")
+![ER_Image](/img/ER.png "ER")
