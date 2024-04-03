@@ -8,7 +8,7 @@ if (!$conn) {
 }
 
 // Create Song
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && $_GET['action'] === 'addSong') {
     $data = json_decode(file_get_contents("php://input"), true);
     $title = $data['title'];
     $artist = $data['artist'];
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 // Read Songs
-if ($_SERVER['REQUEST_METHOD'] === 'GET') {
+if ($_SERVER['REQUEST_METHOD'] === 'GET' && $_GET['action'] === 'getSongs') {
     $sql = "SELECT * FROM songs";
     $result = mysqli_query($conn, $sql);
 
@@ -39,7 +39,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 }
 
 // Update Song
-if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
+if ($_SERVER['REQUEST_METHOD'] === 'PUT' && $_GET['action'] === 'updateSong') {
     parse_str(file_get_contents("php://input"), $data);
     $id = $data['id'];
     $title = $data['title'];
@@ -57,7 +57,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
 }
 
 // Delete Song
-if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
+if ($_SERVER['REQUEST_METHOD'] === 'DELETE' && $_GET['action'] === 'deleteSong') {
     parse_str(file_get_contents("php://input"), $data);
     $id = $data['id'];
 
@@ -70,6 +70,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
         echo json_encode(['status' => 'error', 'message' => 'Error deleting song']);
     }
 }
+
+
 
 mysqli_close($conn);
 

@@ -65,7 +65,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
 
-<h2>Registration Form</h2>
+<h2>Registration Form for Artist</h2>
 
 <?php
 if (isset($_SESSION['message'])) {
