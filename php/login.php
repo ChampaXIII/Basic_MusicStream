@@ -16,6 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $user = mysqli_fetch_assoc($result);
         if (password_verify($password, $user['password'])) {
             $_SESSION['username'] = $username;
+            $_SESSION['id'] = $user['id'];
             header('Location: home_user.php');
         } else {
             $_SESSION['message'] = 'Invalid password!';
@@ -32,6 +33,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $artist = mysqli_fetch_assoc($result);
         if (password_verify($password, $artist['password'])) {
             $_SESSION['username'] = $username;
+            $_SESSION['id'] = $artist['id'];
             header('Location: home_artist.php');
         } else {
             $_SESSION['message'] = 'Invalid password!';

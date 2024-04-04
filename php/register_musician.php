@@ -6,6 +6,7 @@ include_once('config.php');
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
+    $music_label = $_POST['music_label'];
 
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
@@ -24,8 +25,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     } else {
         $username = $_POST['username'];
         $password = password_hash($_POST['password'], PASSWORD_DEFAULT);
+        $music_label = $_POST['music_label'];
 
-        $sql = "INSERT INTO artist (username, password) VALUES ('$username', '$password')";
+        $sql = "INSERT INTO artist (recordlabel_name, username, password) VALUES ('$music_label', '$username', '$password')";
             
         $result = mysqli_query($conn, $sql);    
 
@@ -65,7 +67,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 </head>
 <body>
 
-<h2>Registration Form</h2>
+<h2>Registration Form for Musician</h2>
 
 <?php
 if (isset($_SESSION['message'])) {
@@ -74,14 +76,26 @@ if (isset($_SESSION['message'])) {
 }
 ?>
 
-
-
 <form method="post" action="register_musician.php">
     <label>Username:</label>
     <input type="text" name="username" required><br>
 
     <label>Password:</label>
     <input type="password" name="password" required><br>
+
+    <label>Music Label:</label>
+    <select name="music_label" required>
+        <option value="">Select Music Label</option>
+        <?php
+        $sql = "SELECT name FROM recordLabel";
+        $result = $conn->query($sql);
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                echo "<option value='".$row["name"]."'>".$row["name"]."</option>";
+            }
+        }
+        ?>
+    </select><br>
 
     <button type="submit">Register</button>
 </form>

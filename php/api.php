@@ -11,13 +11,13 @@ if (!$conn) {
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents("php://input"), true);
     $title = $data['title'];
-    $artist = $data['artist'];
+    $id_artist = $data['id_artist'];
     $genre = $data['genre'];
 
-    $sql = "INSERT INTO songs (title, artist, genre) VALUES ('$title', '$artist', '$genre')";
+    $sql = "INSERT INTO songs (title, id_artist, genre) VALUES ('$title', '$id_artist', '$genre')";
     $result = mysqli_query($conn, $sql);
 
-    if ($result) {
+    if ($result) {  
         echo json_encode(['status' => 'success', 'message' => 'Song added successfully']);
     } else {
         echo json_encode(['status' => 'error', 'message' => 'Error adding song']);
@@ -26,7 +26,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 // Read Songs
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
-    $sql = "SELECT * FROM songs";
+    $id_artist = isset($_GET['id_artist']) ? $_GET['id_artist'] : null;
+
+    if ($id_artist) {
+        $sql = "SELECT * FROM songs WHERE id_artist = '$id_artist'";
+    } else {
+        $sql = "SELECT * FROM songs";
+    }
+
     $result = mysqli_query($conn, $sql);
 
     $songs = [];
