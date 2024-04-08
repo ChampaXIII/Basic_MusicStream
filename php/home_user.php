@@ -24,7 +24,7 @@ if (!isset($_SESSION['username'])) {
 </head>
 <body>
 
-<h2>Song Playlist</h2>
+<h2>Songs</h2>
 
 <form id="filter">
     <label>Autor:</label>
