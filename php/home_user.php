@@ -7,9 +7,11 @@ $sql = "SELECT id, username FROM artist";
 $result = mysqli_query($conn, $sql);
 
 // Check if the user is not logged in, redirect to login page
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['id'])) {
     header('Location: login.php');
     exit();
+}else{
+    
 }
 
 ?>
@@ -28,14 +30,12 @@ if (!isset($_SESSION['username'])) {
 
 <form id="filter">
     <label>Autor:</label>
-    <select name="artist">
+    <select name="artist" onchange="loadSongs()">
         <option value="">All</option>
         <?php while ($row = mysqli_fetch_assoc($result)): ?>
             <option value="<?= $row['id'] ?>"><?= $row['username'] ?></option>
         <?php endwhile; ?>
     </select>
-    
-    <button type="button" onclick="loadSongs()">Refresh</button>
 </form>
 
 <ul id="songList"></ul>

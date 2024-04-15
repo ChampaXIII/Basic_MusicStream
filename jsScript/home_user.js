@@ -2,7 +2,7 @@ function loadSongs() {
     var artist = document.getElementById('artist');
     var artistId = document.querySelector('select[name="artist"]').value;
 
-    alert(artistId);
+    //alert(artistId);
     if(artistId == null) {
         $.ajax({
             url: 'api.php',
@@ -29,7 +29,7 @@ function displaySongs(songs) {
     $.each(songs, function (index, song) {
         songList.append(
             '<li>' +
-            'Title: ' + song.title + ', Artist: ' + song.artist + ', Genre: ' + song.genre +
+            'Title: ' + song.title + ', Artist: ' + song.artist_username + ', Genre: ' + song.genre +
             '</li>'
         );
     });

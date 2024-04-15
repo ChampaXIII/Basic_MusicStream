@@ -8,6 +8,8 @@ if (!$conn) {
 }
 
 // Create Song
+
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents("php://input"), true);
     $title = $data['title'];
@@ -29,9 +31,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $id_artist = isset($_GET['id_artist']) ? $_GET['id_artist'] : null;
 
     if ($id_artist) {
-        $sql = "SELECT * FROM songs WHERE id_artist = '$id_artist'";
+        //$sql = "SELECT * FROM songs WHERE id_artist = '$id_artist'";
+        $sql = "SELECT songs.*, artist.username as artist_username FROM songs INNER JOIN artist ON songs.id_artist = artist.id WHERE songs.id_artist = '$id_artist'";
     } else {
-        $sql = "SELECT * FROM songs";
+        /* $sql = "SELECT * FROM songs"; */
+        $sql = "SELECT songs.*, artist.username as artist_username FROM songs INNER JOIN artist ON songs.id_artist = artist.id";
     }
 
     $result = mysqli_query($conn, $sql);
