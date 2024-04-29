@@ -1,6 +1,6 @@
-function addSong() {
+function addSong(ID) {
     var title = $('#title').val();
-    var id_artist = document.getElementById('id_artist').innerText;
+    var id_artist = ID;
     var genre = $('#genre').val();
 
     if (title === '' || genre === '' || id_artist === '') {
@@ -14,7 +14,7 @@ function addSong() {
         contentType: 'application/json',
         data: JSON.stringify({ title: title, id_artist: id_artist, genre: genre }),
         success: function (data) {
-            //alert(data.message);
+            alert(data.message);
             loadSongs();
 
             document.getElementById('title').value = '';
@@ -55,10 +55,9 @@ function deleteSong(id) {
     }
 }
 
-function loadSongs() {
+function loadSongs(ID) {
     $.ajax({
-        url: 'api.php?id_artist=' + document.getElementById('id_artist').innerText,
-        type: 'GET',
+        url: 'api.php?id_artist=' + ID,
         success: function (data) {
             displaySongs(data);
         }

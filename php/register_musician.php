@@ -101,7 +101,6 @@ if (isset($_SESSION['message'])) {
 </form>
 
 <a href="login.php">Login</a>
-<a href="regis
 
 </body>
 </html>

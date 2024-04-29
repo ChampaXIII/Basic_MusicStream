@@ -3,8 +3,8 @@ session_start();
 
 include_once('config.php');
 
-$sql = "SELECT id, username FROM artist";
-$result = mysqli_query($conn, $sql);
+$user_id = $_SESSION['id'];
+$username = $_SESSION['username'];
 
 // Check if the user is not logged in, redirect to login page
 if (!isset($_SESSION['id'])) {
@@ -13,6 +13,29 @@ if (!isset($_SESSION['id'])) {
 }else{
     
 }
+
+$sql = "SELECT * FROM users WHERE id = '$user_id' AND username = '$username'";
+$result = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($result) > 0) {
+    // L'utente esiste
+} else {
+    $sql = "SELECT * FROM artist WHERE id = '$user_id' AND username = '$username'";
+    $result = mysqli_query($conn, $sql);
+
+    if(mysqli_num_rows($result) > 0){
+        // L'utente esiste ma è un'artista
+        header('Location: home_artist.php');
+        exit();
+    }else{
+        // L'utente non esiste, reindirizza alla pagina di login
+        header('Location: login.php');
+        exit();
+    }
+}
+
+$sql = "SELECT id, username FROM artist";
+$result = mysqli_query($conn, $sql);
 
 ?>
 

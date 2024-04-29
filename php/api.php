@@ -8,14 +8,17 @@ if (!$conn) {
 }
 
 // Create Song
-
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $data = json_decode(file_get_contents("php://input"), true);
     $title = $data['title'];
     $id_artist = $data['id_artist'];
     $genre = $data['genre'];
 
+    if (empty($title) || empty($id_artist) || empty($genre)) {
+        echo json_encode(['status' => 'error', 'message' => 'All fields are required']);
+        exit();
+    }
+    
     $sql = "INSERT INTO songs (title, id_artist, genre) VALUES ('$title', '$id_artist', '$genre')";
     $result = mysqli_query($conn, $sql);
 
@@ -53,9 +56,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 if ($_SERVER['REQUEST_METHOD'] === 'PUT') {
     parse_str(file_get_contents("php://input"), $data);
     $id = $data['id'];
-    $title = $data['title'];
-    $artist = $data['artist'];
-    $genre = $data['genre'];
+
+    // Fetch the current song details
+    $sql = "SELECT * FROM songs WHERE id=$id";
+    $currentSong = mysqli_fetch_assoc(mysqli_query($conn, $sql));
+
+    // Check if the input is set, else assign the old value
+    $title = isset($data['title']) ? $data['title'] : $currentSong['title'];
+    $artist = isset($data['artist']) ? $data['artist'] : $currentSong['artist'];
+    $genre = isset($data['genre']) ? $data['genre'] : $currentSong['genre'];
 
     $sql = "UPDATE songs SET title='$title', artist='$artist', genre='$genre' WHERE id=$id";
     $result = mysqli_query($conn, $sql);
@@ -80,6 +89,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'DELETE') {
     } else {
         echo json_encode(['status' => 'error', 'message' => 'Error deleting song']);
     }
+
+
 }
 
 mysqli_close($conn);
