@@ -85,8 +85,8 @@ if (isset($_SESSION['message'])) {
     <button type="submit">Register</button>
 </form>
 
-<a href="login.php">Login</a>
-<a href="register_musician.php">You are a musician?</a>
+<p>Do you already have an account?<a href="login.php"> Login</a></p>
+<a href="register_musician.php">Are you a musician?</a>
 
 </body>
 </html>

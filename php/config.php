@@ -2,7 +2,7 @@
 $db_host = 'localhost';
 $db_user = 'root';
 $db_password = '';
-$db_name = 'nl';
+$db_name = 'nnl';
 
 $conn = mysqli_connect($db_host, $db_user, $db_password, $db_name);
 

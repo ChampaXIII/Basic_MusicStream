@@ -1,11 +1,42 @@
 <?php
 session_start();
 
+include_once('config.php');
+
+$user_id = $_SESSION['id'];
+$username = $_SESSION['username'];
+
 // Check if the user is not logged in, redirect to login page
-if (!isset($_SESSION['username'])) {
+if (!isset($_SESSION['id'])) {
     header('Location: login.php');
     exit();
+}else{
+    
 }
+
+$sql = "SELECT * FROM users WHERE id = '$user_id' AND username = '$username'";
+$result = mysqli_query($conn, $sql);
+
+if (mysqli_num_rows($result) > 0) {
+    // L'utente esiste
+} else {
+    $sql = "SELECT * FROM artist WHERE id = '$user_id' AND username = '$username'";
+    $result = mysqli_query($conn, $sql);
+
+    if(mysqli_num_rows($result) > 0){
+        // L'utente esiste ma è un'artista
+        header('Location: home_artist.php');
+        exit();
+    }else{
+        // L'utente non esiste, reindirizza alla pagina di login
+        header('Location: login.php');
+        exit();
+    }
+}
+
+$sql = "SELECT id, username FROM artist";
+$result = mysqli_query($conn, $sql);
+
 ?>
 
 <!DOCTYPE html>
@@ -18,22 +49,16 @@ if (!isset($_SESSION['username'])) {
 </head>
 <body>
 
-<h2>Song Playlist</h2>
+<h2>Songs</h2>
 
-<form id="addSongForm">
-    <label>Title:</label>
-    <input type="text" id="title" required><br>
-
-    <label>Artist:</label>
-    <input type="text" id="artist" required><br>
-
-    <label>Genre:</label>
-    <input type="text" id="genre" required><br>
-
-    <!-- <label>Audio:</label>
-    <input type="file" id="audio" accept="audio/*" required><br> -->
-
-    <button type="button" onclick="addSong()">Add Song</button>
+<form id="filter">
+    <label>Autor:</label>
+    <select name="artist" onchange="loadSongs()">
+        <option value="">All</option>
+        <?php while ($row = mysqli_fetch_assoc($result)): ?>
+            <option value="<?= $row['id'] ?>"><?= $row['username'] ?></option>
+        <?php endwhile; ?>
+    </select>
 </form>
 
 <ul id="songList"></ul>
